@@ -1,0 +1,72 @@
+<!doctype html>
+<html itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+  <head>
+    <title>Brownell | brwnll.com</title>
+    <link rel="shortcut icon" href="https://www.brwnll.com/imgs/favicon.ico"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700">
+    <link rel="stylesheet" href="assets/styles.css"/>
+  </head>
+  <body>
+    <div id="header">
+      <h1>@brwnll</h1>
+      <h2>Where I am</h2>
+      <ul>
+        <li>
+          <a href="https://www.linkedin.com/in/brwnll/">
+            <img src="https://www.brwnll.com/imgs/linkedin.svg">
+            LinkedIn 
+          </a>
+        </li>
+        <li>
+          <a href="https://www.github.com/brwnll/">
+            <img src="https://www.brwnll.com/imgs/github.svg">
+            GitHub
+          </a>      
+        </li>
+        <li>
+          <a href="https://www.twitter.com/brwnll/">
+            <img src="https://www.brwnll.com/imgs/twitter.svg">
+            Twitter
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div id='container'>
+      <div class="card">
+        <h2>What I'm Making</h2>
+        <p>Websites and Web Applications I've written</p>
+
+        {{#each websites}}
+          {{> website this}}
+        {{/each}}
+      </div>
+      <div class="card">
+        <h2>What I'm Reading</h2>
+        <p>Books I've read and reccomend</p>
+        {{#each books}}
+          {{> book this}}
+        {{/each}}
+      </div>
+
+      <div class="card">
+        <h2>What I'm Listening to</h2>
+        <p>Podcasts I subscribe to</p>
+
+        {{#each podcasts}}
+          {{> podcast this}}
+        {{/each}}
+      </div>
+    </div>
+  </div>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-10061222-13', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>
