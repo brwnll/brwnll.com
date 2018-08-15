@@ -5,6 +5,8 @@ const htmlmin = require('gulp-htmlmin');
 const s3 = require('gulp-s3-upload')({
   useIAM: true,
 });
+const AWS = require("aws-sdk");
+const inquirer = require("inquirer");
 
 const config = require('./config.json');
 
@@ -35,4 +37,47 @@ gulp.task('default', function() {
       }, {
         maxRetries: 5,
       }))
+});
+
+gulp.task("cache", function() {
+  inquirer
+    .prompt([
+      {
+        type: "list",
+        name: "level",
+        message: "Cache clear level",
+        choices: ["HTML", "Assets", "All"]
+      }
+    ])
+    .then(answers => {
+      const cf = new AWS.CloudFront();
+
+      const paths = {
+        All: ["/*"],
+        Assets: ["/assets/*"],
+        HTML: ["/index", "/error", "/honeyfund"]
+      };
+
+      cf.createInvalidation(
+        {
+          DistributionId: "E23DIBMMR6Q28S",
+          InvalidationBatch: {
+            CallerReference: `${Date.now()}`,
+            Paths: {
+              Quantity: paths[answers.level].length,
+              Items: paths[answers.level]
+            }
+          }
+        },
+        function(err, data) {
+          if (err) throw err;
+
+          console.log(
+            `${answers.level} invalidation ${data.Invalidation.Id} ${
+              data.Invalidation.Status
+            }`
+          ); // successful response
+        }
+      );
+    });
 });
